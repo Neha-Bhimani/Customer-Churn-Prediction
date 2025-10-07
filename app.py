@@ -9,7 +9,7 @@ best_model = joblib.load(open("best_model.pkl", "rb"))
 encoder = joblib.load(open("encoders.pkl", "rb"))
 
 
-st.title("Chrun Prediction App")
+st.title("Customer Chrun Prediction App")
 
 st.markdown("Predict whether a customer will Churn or Not Churn based on their service details.")
 
@@ -104,9 +104,8 @@ for col in input_df.columns:
 # -----------------------------
 if st.button("Predict Churn"):
     pred = best_model.predict(input_df)[0]
-    prob = best_model.predict_proba(input_df)[0][1] if hasattr(best_model, "predict_proba") else None
 
     if pred == 1:
-        st.error(f"Customer is likely to **Churn**. Probability: {prob:.2f}" if prob else "Customer is likely to **Churn**.")
+        st.error("Customer is likely to **Churn**.")
     else:
-        st.success(f"Customer is likely to **Not Churn**. Probability: {prob:.2f}" if prob else "Customer is likely to **Not Churn**.")
+        st.success("Customer is likely to **Not Churn**.")
